@@ -68,6 +68,8 @@ Before importing the data into SQL, I made several adjustments in Excel:
 After these modifications, I copied the Excel tables into SQL. This approach is efficient for:
 - Familiarizing myself with the data.
 - Data normalization, which reduces the size of the data.
+  
+![image](https://github.com/user-attachments/assets/78473aa7-d728-414b-9fb6-5bf3ec334217)
 
 However, while this method improves efficiency for checking and exploring data, it's less efficient in terms of large-scale data usage. Fortunately, the dataset's size can be classified as moderate.
 
@@ -139,3 +141,4 @@ SELECT DISTINCT Store_type FROM CUSTOMERS;
 
 ```
 These queries provided a foundational understanding of the data and helped identify key trends and outliers in customer behavior, order channels, and purchasing patterns
+
