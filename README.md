@@ -57,3 +57,85 @@ This project involves the exploration and analysis of customer data from **FLO**
 13. **Store_type**: 
     - Consists of 3 main store types, with 4 combinations based on customer purchasing habits.
 
+## Steps
+
+### Data Preparation
+
+Before importing the data into SQL, I made several adjustments in Excel:
+- Formatted date columns to ensure consistency.
+- Removed unnecessary characters and cleaned up the data.
+
+After these modifications, I copied the Excel tables into SQL. This approach is efficient for:
+- Familiarizing myself with the data.
+- Data normalization, which reduces the size of the data.
+
+However, while this method improves efficiency for checking and exploring data, it's less efficient in terms of large-scale data usage. Fortunately, the dataset's size can be classified as moderate.
+
+### SQL Queries
+
+To gain a basic understanding of the data, I wrote the following queries in SQL:
+
+```sql
+-- General overview of the dataset
+SELECT * FROM CUSTOMERS;
+
+-- To observe the minimum and maximum character lengths of Master_ID
+SELECT DISTINCT MIN(LEN(Master_ID)) AS MINIMUM_LENGTH, 
+                MAX(LEN(Master_ID)) AS MAXIMUM_LENGTH 
+FROM CUSTOMERS 
+GROUP BY Master_ID;
+
+-- Distinct values of the Order Channel
+SELECT DISTINCT Order_channel FROM CUSTOMERS;
+
+-- Distinct values of the Last Order Channel
+SELECT DISTINCT Last_order_channel FROM CUSTOMERS;
+
+-- Minimum and maximum Last Order Dates
+SELECT MIN(Last_order_date) AS MIN_LAST_DATE, 
+       MAX(Last_order_date) AS MAX_LAST_DATE 
+FROM CUSTOMERS;
+
+-- Minimum and maximum First Order Dates
+SELECT MIN(First_order_date) AS MIN_FIRST_DATE, 
+       MAX(First_order_date) AS MAX_FIRST_DATE 
+FROM CUSTOMERS;
+
+-- Minimum and maximum Last Online Order Dates
+SELECT MIN(Last_order_date_online) AS MIN_LAST_OR_ONLINE_DATE, 
+       MAX(Last_order_date_online) AS MAX_LAST_OR_ONLINE_DATE 
+FROM CUSTOMERS;
+
+-- Minimum and maximum Last Offline Order Dates
+SELECT MIN(Last_order_date_offline) AS MIN_LAST_OR_OFFLINE_DATE, 
+       MAX(Last_order_date_offline) AS MAX_LAST_OR_OFFLINE_DATE 
+FROM CUSTOMERS;
+
+-- Minimum and maximum order amounts (offline)
+SELECT MIN(Order_num_total_ever_offline), 
+       MAX(Order_num_total_ever_offline) 
+FROM CUSTOMERS;
+
+-- Minimum and maximum order amounts (online)
+SELECT MIN(Order_num_total_ever_online), 
+       MAX(Order_num_total_ever_online) 
+FROM CUSTOMERS;
+
+-- Minimum and maximum customer values (offline)
+SELECT MIN(Customer_value_total_ever_offline), 
+       MAX(Customer_value_total_ever_offline) 
+FROM CUSTOMERS;
+
+-- Minimum and maximum customer values (online)
+SELECT MIN(Customer_value_total_ever_online), 
+       MAX(Customer_value_total_ever_online) 
+FROM CUSTOMERS;
+
+-- Distinct values of Interested Categories
+SELECT DISTINCT Interested_in_categories_12 FROM CUSTOMERS;
+
+-- Distinct values of Store Type
+SELECT DISTINCT Store_type FROM CUSTOMERS;
+
+```
+These queries provided a foundational understanding of the data and helped identify key trends and outliers in customer behavior, order channels, and purchasing patterns
