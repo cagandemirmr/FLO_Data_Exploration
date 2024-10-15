@@ -142,3 +142,36 @@ SELECT DISTINCT Store_type FROM CUSTOMERS;
 ```
 These queries provided a foundational understanding of the data and helped identify key trends and outliers in customer behavior, order channels, and purchasing patterns
 
+### Analysis Questions
+
+In the end of variability analysis,some questions appeared in my mind which are
+
+1. **What is the unique customer number who made a purchase?**
+
+2. **What is the total number of purchases and the total revenue?**
+
+3. **What is the average revenue per purchase?**
+
+4. **What is the total revenue and number of purchases made through the last order channel (last_order_channel)?**
+
+5. **What is the total revenue broken down by store type?**
+
+6. **What is the number of purchases per year based on the customer's first order date (first_order_date)?**
+
+7. **What is the average revenue per purchase, broken down by the last order channel (last_order_channel)?**
+
+8. **What is the most popular category in the last 12 months?**
+
+9. **What is the most preferred store type?**
+
+10. **What is the most popular category and the total amount spent in that category, broken down by the last order channel (last_order_channel)?**
+
+11. **What is the ID of the customer who made the most purchases?**
+
+12. **What is the average revenue per purchase and the average number of days between purchases (purchase frequency) for the customer who made the most purchases?**
+
+13. **What is the average number of days between purchases (purchase frequency) for the top 100 customers by total revenue?**
+
+14. **Who is the customer who made the most purchases, broken down by the last order channel (last_order_channel)?**
+
+15. **What is the ID of the last customer who made a purchase (including multiple IDs if there were multiple purchases on the latest date)?**
