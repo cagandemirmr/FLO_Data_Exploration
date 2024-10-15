@@ -144,34 +144,97 @@ These queries provided a foundational understanding of the data and helped ident
 
 ### Analysis Questions
 
-In the end of variability analysis,some questions appeared in my mind which are
+In the end of variability analysis,some questions appeared in my mind and write querries in SQL.
 
 1. **What is the unique customer number who made a purchase?**
 
+  select count(distinct Master_ID) TOTALCUSTOMERS from CUSTOMERS .
+
+  ![image](https://github.com/user-attachments/assets/320ea439-169b-4982-a425-93cf7da85d95)
+
+
 2. **What is the total number of purchases and the total revenue?**
+   
+select sum(Order_num_total_ever_offline+Order_num_total_ever_online) TOTAL_AMOUNT_OF_SALES,sum(Customer_value_total_ever_offline+Customer_value_total_ever_online) REVENUE
+from CUSTOMERS
+
+![image](https://github.com/user-attachments/assets/220819c8-e03d-4bc2-b6f6-7cfa9e9ab1a1)
+
 
 3. **What is the average revenue per purchase?**
+select (sum(Customer_value_total_ever_offline+ Customer_value_total_ever_online)/ sum(Order_num_total_ever_offline+Order_num_total_ever_online) )AVG_REVENUE 
+from CUSTOMERS
 
-4. **What is the total revenue and number of purchases made through the last order channel (last_order_channel)?**
+![image](https://github.com/user-attachments/assets/c52d6bb1-06a3-43a2-8b72-024807e9569a)
 
-5. **What is the total revenue broken down by store type?**
+5. **What is the total revenue and number of purchases made through the last order channel (last_order_channel)?**
+select Last_order_channel, (sum(Customer_value_total_ever_offline+Customer_value_total_ever_online)/ sum(Order_num_total_ever_offline+Order_num_total_ever_online)) AVG_REVENUE 
+from CUSTOMERS group by Last_order_channel
 
-6. **What is the number of purchases per year based on the customer's first order date (first_order_date)?**
+![image](https://github.com/user-attachments/assets/10d53509-e590-4d91-8aef-0db219e96ad9)
 
-7. **What is the average revenue per purchase, broken down by the last order channel (last_order_channel)?**
 
-8. **What is the most popular category in the last 12 months?**
+7. **What is the total revenue  by store type?**
+select  Store_type,sum(Customer_value_total_ever_offline+Customer_value_total_ever_online) TOTAL_REVENUE 
+from CUSTOMERS group by Store_type
 
-9. **What is the most preferred store type?**
+![image](https://github.com/user-attachments/assets/de61cff0-639d-4c99-b036-9dc6e70d295f)
 
-10. **What is the most popular category and the total amount spent in that category, broken down by the last order channel (last_order_channel)?**
 
-11. **What is the ID of the customer who made the most purchases?**
+9. **What is the number of purchases per year based on the customer's first order date (first_order_date)?**
+select year(First_order_date) YEAR_,sum(Customer_value_total_ever_offline+Customer_value_total_ever_online) TOTAL_AMOUNT_OF_SALES
+from CUSTOMERS group by year(First_order_date) order by 2 desc
 
-12. **What is the average revenue per purchase and the average number of days between purchases (purchase frequency) for the customer who made the most purchases?**
+![image](https://github.com/user-attachments/assets/7f60a01c-06f5-407c-ba27-d2baf4ccfef3)
 
-13. **What is the average number of days between purchases (purchase frequency) for the top 100 customers by total revenue?**
 
-14. **Who is the customer who made the most purchases, broken down by the last order channel (last_order_channel)?**
+11. **What is the average revenue per purchase,  by the last order channel (last_order_channel)?**
+select Last_order_channel, sum(Customer_value_total_ever_offline+Customer_value_total_ever_online)/sum(Order_num_total_ever_offline+Order_num_total_ever_online) PRODUCTIVITY
+from CUSTOMERS 
+group by Last_order_channel
 
-15. **What is the ID of the last customer who made a purchase (including multiple IDs if there were multiple purchases on the latest date)?**
+![image](https://github.com/user-attachments/assets/0e7b8b3f-f20c-4b3a-9360-e31bcf973b7e)
+
+
+12. **What is the most popular category in the last 12 months?**
+select Interested_in_categories_12,count(*) Frequency
+from CUSTOMERS
+group by Interested_in_categories_12
+order by 2 desc
+
+![image](https://github.com/user-attachments/assets/84103679-070a-442d-adda-9257b885f9d8)
+
+
+14. **What is the most preferred store type?**
+select top 1 Store_type,count(*) Store_count 
+from CUSTOMERS group by Store_type
+order by 2 desc
+
+![image](https://github.com/user-attachments/assets/05c803f1-3877-4f02-8460-5938f92d50bd)
+
+
+16. **What is the most popular category and the total amount spent in that category, broken down by the last order channel (last_order_channel)?**
+SELECT DISTINCT 
+    C.Last_order_channel,
+    (SELECT TOP 1 Interested_in_categories_12 
+     FROM CUSTOMERS 
+     WHERE Last_order_channel = C.Last_order_channel 
+     GROUP BY Interested_in_categories_12
+     ORDER BY SUM(Order_num_total_ever_offline + Order_num_total_ever_online) DESC) AS Top_category,
+    (SELECT TOP 1 SUM(Order_num_total_ever_offline + Order_num_total_ever_online) 
+     FROM CUSTOMERS 
+     WHERE Last_order_channel = C.Last_order_channel 
+     GROUP BY Interested_in_categories_12
+     ORDER BY SUM(Order_num_total_ever_offline + Order_num_total_ever_online) DESC) AS Total_order
+FROM CUSTOMERS C
+
+
+18. **What is the ID of the customer who made the most purchases?**
+
+19. **What is the average revenue per purchase and the average number of days between purchases (purchase frequency) for the customer who made the most purchases?**
+
+20. **What is the average number of days between purchases (purchase frequency) for the top 100 customers by total revenue?**
+
+21. **Who is the customer who made the most purchases, broken down by the last order channel (last_order_channel)?**
+
+22. **What is the ID of the last customer who made a purchase (including multiple IDs if there were multiple purchases on the latest date)?**
