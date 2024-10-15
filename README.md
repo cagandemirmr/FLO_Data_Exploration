@@ -1,5 +1,8 @@
 # FLO Customer Data Exploration
 
+![image](https://github.com/user-attachments/assets/f1f05852-2803-4aa4-bc22-934a68e191ca)
+
+
 This project involves the exploration and analysis of customer data from **FLO**, a leading producer and retailer in the Turkish shoe industry. The dataset contains information on customer purchasing behavior across various channels, including both online and offline transactions.
 
 ## Dataset Information
